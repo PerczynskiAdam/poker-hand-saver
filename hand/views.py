@@ -5,9 +5,11 @@ from .forms import HandForm, PlayerForm
 # Create your views here.
 def index(request):
    hand_info = Hands.objects.all()
+   player_info =  Players.objects.all()
    hand_form = HandForm()
    player_form = PlayerForm()
    context = {'hand_info': hand_info,
+   'player_info': player_info,
    'hand_form': hand_form,
    'player_form': player_form
    }
@@ -40,6 +42,7 @@ def addPlayerInfo(request):
    if request.method == 'POST':
       try:
          player_form = PlayerForm(request.POST)
+         print(request.POST)
          if player_form.is_valid():
             new_player = player_form.save()
             return redirect('index')

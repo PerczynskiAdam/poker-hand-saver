@@ -25,7 +25,7 @@ class Hands(models.Model):
       return str(self.id)
 
 class Players(models.Model):
-   hand = models.ForeignKey(Hands, on_delete = models.SET_NULL,  null = True)
+   hand = models.ForeignKey(Hands, on_delete = models.CASCADE,  null = True)
    hero = models.BooleanField(default=False, null = True)
    position_choices = [
       ('UTG', 'Under The Gun'),

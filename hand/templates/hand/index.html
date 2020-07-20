@@ -11,24 +11,26 @@
    <div class="container">
       <div class="row">
          <div class="col-lg-6">
-            <p>Formularz</p>
+            <p><strong>Formularz</strong></p>
             <form action="{% url 'addhandinfo' %}" role = "form" method = "POST">
                {% csrf_token %}
                <p>Liczba graczy:</p>
-               {{ hand_form.num_of_players }}
+               {{ hand_form.as_p }}
                <input type="submit" value="Dodaj" class = 'btn btn-secondary'>
                <hr>
             </form>
             <form action="{% url 'addplayerinfo' %}" role = "form" method = "POST">
                {% csrf_token %}
                <p>Informacje o graczu</p>
-               {{ player_form.position }} {{player_form.hero}} {{player_form.first_card}} {{player_form.second_card}}
+               {{ player_form.as_p }}
                <hr>
                <input type="submit" value = "Dalej" class = 'btn btn-secondary'>
             </form>
          </div>
+
+
          <div class="col-lg-6">
-            <p>Zapis graficzny</p>
+            <p><strong>Zapis graficzny</strong></p>
             {% for i in hand_info %}
                <p>Ilość graczy: {{ i.num_of_players }}</p>
                <p>Blinds: {{i.blinds}}</p>
@@ -36,23 +38,21 @@
             {% endfor %}
              <h5 style = "background-color: aqua;">Preflop</h5>
              <div class="row" style = "background-color: red">
-               {% if actions_pre %}
-                  {% for act in actions_pre %}
+                  {% for play in player_info %}
                   <div class="col-lg-6">
-                     <p>Hero: {{act.player.hero}}</p>
-                     <p>{{act.player.position}}: {{act.player.first_card}}{{act.player.second_card}}</p>
-                     <p>{{act.action}} {{act.pf_act_amount}}</p>
+                     <p>Hero: {{play.hero}}</p>
+                     <p>{{play.position}}: {{play.first_card}}{{play.second_card}}</p>
+                     <p>{{play.pre_action}} {{play.pre_act_amount}}</p>
                   </div>
                   {% endfor %}
-               {% endif %}
             </div>
             <div>
                <p>POT: nie potrafie policzyc</p>
             </div>
             <h5 style = "background-color: aqua;">Flop</h5>
             <div class="row">
-               {% for act in actions_f %}
-               <div class="col-lg-6">{{act.player.position}} {{act.action}} {{act.f_act_amount}}</div>
+               {% for play in player_info %}
+               <div class="col-lg-6"> {{play.flop_action}} {{ play.flop_act_amount}}</div>
                {% endfor %}
             </div>
             <h6>Hero wins: 6,5-2,5 = 4*0.95 = 3,8</h6>
