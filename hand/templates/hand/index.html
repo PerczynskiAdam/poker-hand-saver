@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Handsaver</title>
+   <title>Hand Library</title>
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="
    sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
@@ -11,51 +11,21 @@
    <div class="container">
       <div class="row">
          <div class="col-lg-6">
-            <p><strong>Formularz</strong></p>
+            <p><strong>Hand Form</strong></p>
             <form action="{% url 'addhandinfo' %}" role = "form" method = "POST">
                {% csrf_token %}
-               <p>Liczba graczy:</p>
                {{ hand_form.as_p }}
-               <input type="submit" value="Dodaj" class = 'btn btn-secondary'>
+               <input type="submit" value="Add hand to library" class = 'btn btn-secondary'>
                <hr>
-            </form>
-            <form action="{% url 'addplayerinfo' %}" role = "form" method = "POST">
-               {% csrf_token %}
-               <p>Informacje o graczu</p>
-               {{ player_form.as_p }}
-               <hr>
-               <input type="submit" value = "Dalej" class = 'btn btn-secondary'>
             </form>
          </div>
 
 
          <div class="col-lg-6">
-            <p><strong>Zapis graficzny</strong></p>
-            {% for i in hand_info %}
-               <p>Ilość graczy: {{ i.num_of_players }}</p>
-               <p>Blinds: {{i.blinds}}</p>
-               <p>{{i.potSize}}</p>
+            <p><strong>Library</strong></p>
+            {% for hand in hands %}
+               <a href="{% url 'playersinfo' hand.id %}"><p>{{hand.publish_date}}__{{hand.blinds}}__{{hand.num_of_players}}</p></a>
             {% endfor %}
-             <h5 style = "background-color: aqua;">Preflop</h5>
-             <div class="row" style = "background-color: red">
-                  {% for play in player_info %}
-                  <div class="col-lg-6">
-                     <p>Hero: {{play.hero}}</p>
-                     <p>{{play.position}}: {{play.first_card}}{{play.second_card}}</p>
-                     <p>{{play.pre_action}} {{play.pre_act_amount}}</p>
-                  </div>
-                  {% endfor %}
-            </div>
-            <div>
-               <p>POT: nie potrafie policzyc</p>
-            </div>
-            <h5 style = "background-color: aqua;">Flop</h5>
-            <div class="row">
-               {% for play in player_info %}
-               <div class="col-lg-6"> {{play.flop_action}} {{ play.flop_act_amount}}</div>
-               {% endfor %}
-            </div>
-            <h6>Hero wins: 6,5-2,5 = 4*0.95 = 3,8</h6>
          </div>
       </div>
    </div>

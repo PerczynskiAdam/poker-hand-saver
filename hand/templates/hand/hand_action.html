@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hand</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="
+   sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-4">
+            <form action="" role = "form" method="POST">
+               {% csrf_token %}
+               {% for form in formset %}
+                  {{formset.management_form}}
+                  {{form.as_p}}
+                  <hr>
+               {% endfor %}
+               <input type="submit" value = "Add to Lib" class = 'btn btn-secondary'>
+            </form>
+         </div>
+      </div>
+      <div>
+      </div>
+      <div>
+         <div>
+            <h5>Hand informations</h5>
+            <p>Blinds: {{hand.blinds}}</p>
+            <p>Nr of players: {{hand.num_of_players}}</p>
+            <p>Pot: {{hand.potSize}}</p>
+         </div>
+         <div>
+            <h5>PreFlop</h5>
+            <div class="row">
+               {% for play in players %}
+               <div class="col-lg-2">
+                  <hr>
+                  <p>Hero: {{play.hero}}</p>
+                  <hr>
+                  <p>{{play.position}}: {{play.first_card}}{{play.first_card_suit}}
+                     {{play.second_card}}{{play.second_card_suit}}</p>
+                  <hr>
+                  <p>{{play.pre_action}} {{play.pre_act_amount}}</p>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+         <div>
+            <h5>Flop</h5>
+            <div class="row">
+               {% for play in players %}
+               <div class="col-lg-2">
+                  <hr>
+                  <p>{{play.flop_action}}: {{play.flop_act_amount}}</p>
+               </div>
+               {% endfor %}
+         </div>
+         <div class = "d-none">
+            <h5>Turn</h5>
+         </div>
+         <div class = "d-none">
+            <h5>River</h5>
+         </div>
+      </div>
+      <div>
+         <a href="{% url 'index' %}"><button class = "btn btn-info">Library</button></a>
+      </div>
+   </div>
+</body>
+</html>

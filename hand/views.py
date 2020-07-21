@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Hands, Players
+from django.forms import inlineformset_factory
 from .forms import HandForm, PlayerForm
 
 # Create your views here.
 def index(request):
-   hand_info = Hands.objects.all()
+   hands = Hands.objects.all()
    player_info =  Players.objects.all()
    hand_form = HandForm()
    player_form = PlayerForm()
-   context = {'hand_info': hand_info,
+   context = {'hands': hands,
    'player_info': player_info,
    'hand_form': hand_form,
    'player_form': player_form
@@ -36,15 +37,28 @@ def addHandInfo(request):
    # template_name = 'hands/index.html',
    # context = context)
 
-
-
-def addPlayerInfo(request):
+def playersInfo(request, pk):
+   hand = Hands.objects.get(id=pk)
+   PlayersFormSet = inlineformset_factory(Hands, Players, fields = '__all__', extra = hand.num_of_players, max_num=hand.num_of_players)
+   players = Players.objects.filter(hand=hand)
+   # form = PlayerForm(initial={'hand': hand})
+   formset = PlayersFormSet(instance=hand)
    if request.method == 'POST':
       try:
-         player_form = PlayerForm(request.POST)
-         print(request.POST)
-         if player_form.is_valid():
-            new_player = player_form.save()
+         formset = PlayersFormSet(request.POST, instance = hand)
+         if formset.is_valid():
+            # print("form is valid")
+            new_player = formset.save()
             return redirect('index')
+         # else:
+         #    print("Form is not valid")
+         #    return redirect('index')
       except Exception as e:
          print(str(e))
+   context = {'hand': hand,
+   'players': players,
+   'formset': formset
+   }
+   return render(request,
+   template_name = 'hand/hand_action.html',
+   context = context)
