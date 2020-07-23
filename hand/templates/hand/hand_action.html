@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
    <meta charset="UTF-8">
@@ -6,67 +7,123 @@
    <title>Hand</title>
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="
    sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link rel="stylesheet" href="{% static 'hand/css/hand_action.css' %}">
 </head>
 <body>
    <div class="container">
       <div class="row">
          <div class="col-lg-4">
             <form action="" role = "form" method="POST">
+               <!-- <button id = "hand-info-btn" class = "btn btn-danger d-none">Hand Informations</button> -->
                {% csrf_token %}
                {% for form in formset %}
                   {{formset.management_form}}
-                  {{form.as_p}}
+                  <div class = "hand-info">
+                     <p>Hand info</p>
+                     {{form.hero}}
+                     {{form.position}}
+                     {{form.stack}}
+                     <p>{{form.first_card}}{{form.first_card_suit}} 
+                        {{form.second_card}}{{form.second_card_suit}}
+                     </p>
+                  </div>
+                  <div class="pre-info d-none">
+                     <p>Pre</p>
+                     {{form.pre_action}} {{form.pre_act_amount}}
+                  </div>
+                  <div class="flop-info d-none">
+                     <p>Flop</p>
+                     {{form.flop_action}} {{form.flop_act_amount}}
+                  </div>
+                  <div class="turn-info d-none">
+                     <p>Turn</p>
+                     {{form.turn_action}} {{form.turn_act_amount}}
+                  </div>
+                  <div class="river-info d-none">
+                     <p>River</p>
+                     {{form.river_action}} {{form.river_act_amount}}
+                  </div>
                   <hr>
                {% endfor %}
-               <input type="submit" value = "Add to Lib" class = 'btn btn-secondary'>
+               <button class = "btn btn-secondary" id = "go-to-pre">PreFlop</button>
+               <button class = 'btn btn-secondary d-none' id = "go-to-flop">Flop</button>
+               <button class = 'btn btn-secondary d-none' id = "go-to-turn">Turn</button>
+               <button class = 'btn btn-secondary d-none' id = "go-to-river">River</button>
+               <input type="submit" value = "Add to Lib" class = 'btn btn-success'>
             </form>
          </div>
-      </div>
-      <div>
-      </div>
-      <div>
-         <div>
-            <h5>Hand informations</h5>
-            <p>Blinds: {{hand.blinds}}</p>
-            <p>Nr of players: {{hand.num_of_players}}</p>
-            <p>Pot: {{hand.potSize}}</p>
+         <div class = "col-lg-2 progressbar-container d-none">
+            <ul class = "progressbar">
+               <li>Hand Info</li>
+               <li>PreFlop</li>
+            </ul>
          </div>
-         <div>
-            <h5>PreFlop</h5>
-            <div class="row">
-               {% for play in players %}
-               <div class="col-lg-2">
-                  <hr>
-                  <p>Hero: {{play.hero}}</p>
-                  <hr>
-                  <p>{{play.position}}: {{play.first_card}}{{play.first_card_suit}}
-                     {{play.second_card}}{{play.second_card_suit}}</p>
-                  <hr>
-                  <p>{{play.pre_action}} {{play.pre_act_amount}}</p>
+      </div>
+      <div>
+         <div id = "handhistory">
+            <div class="row border">
+               <div class = 'border'>
+                  <div class = 'head'>
+                     <p>Blinds</p>
+                     <p>{{hand.blinds}}</p>
+                  </div>
+                  <div class = "body">
+                     {% for play in players %}
+                        <p>{{play.hero}} {{play.position}}: {{play.handCards}}</p>
+                        <p>{{play.stack}}</p>
+                     {% endfor %}
+                  </div>
                </div>
-               {% endfor %}
+               <div class = 'mx-1'>
+                  <div class = 'head'>
+                     <p>Pre</p>
+                     <p>{{ hand.potSize }}</p>
+                  </div>
+                  <div class = "body">
+                     {% for play in players %}
+                        <p>{{play.pre_action}}: {{play.pre_act_amount}}</p>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div class = 'mx-1'>
+                  <div class = 'head'>
+                     <p>Flop</p>
+                     <p>{{ hand.flopPotSize }}</p>
+                  </div>
+                  <div class = "body">
+                     {% for play in players %}
+                        <p>{{play.flop_action}}: {{play.flop_act_amount}}</p>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div class = 'mx-1'>
+                  <div class = 'head'>
+                     <p>Turn</p>
+                     <p>{{ hand.turnPotSize }}</p>
+                  </div>
+                  <div class = "body">
+                     {% for play in players %}
+                        <p>{{play.turn_action}}: {{play.turn_act_amount}}</p>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div class = 'mx-1'>
+                  <div class = 'head'>
+                     <p>River</p>
+                     <p>{{ hand.riverPotSize }}</p>
+                  </div>
+                  <div class = "body">
+                     {% for play in players %}
+                        <p>{{play.river_action}}: {{play.river_act_amount}}</p>
+                     {% endfor %}
+                  </div>
+               </div>
             </div>
          </div>
-         <div>
-            <h5>Flop</h5>
-            <div class="row">
-               {% for play in players %}
-               <div class="col-lg-2">
-                  <hr>
-                  <p>{{play.flop_action}}: {{play.flop_act_amount}}</p>
-               </div>
-               {% endfor %}
-         </div>
-         <div class = "d-none">
-            <h5>Turn</h5>
-         </div>
-         <div class = "d-none">
-            <h5>River</h5>
-         </div>
-      </div>
       <div>
          <a href="{% url 'index' %}"><button class = "btn btn-info">Library</button></a>
       </div>
    </div>
+   <script src = "{% static 'hand/js/hand_action.js' %}" type = "module"></script>
 </body>
 </html>

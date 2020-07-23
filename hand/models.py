@@ -21,19 +21,44 @@ class Hands(models.Model):
       verbose_name= "Nr of players",
       default=2)
    publish_date = models.DateTimeField(auto_now_add=True)
+
    @property
    def potSize(self):
       sb = self.blinds.split('/')[0]
       bb = self.blinds.split('/')[1]
       potsize = int(sb) + int(bb)
       return potsize
+      
+   @property
+   def flopPotSize(self):
+      players = self.players_set.all()
+      pre = sum([sum([int(k) for k in j]) if isinstance(j, list) else int(j) for j in [i.pre_act_amount.split('/') if '/' in i.pre_act_amount else i.pre_act_amount for i in players]])
+      potsize = pre + self.potSize
+      return potsize 
+
+   @property
+   def turnPotSize(self):
+      players = self.players_set.all()
+      flop = sum([sum([int(k) for k in j]) if isinstance(j, list) else int(j) for j in [i.flop_act_amount.split('/') if '/' in i.flop_act_amount else i.flop_act_amount for i in players]])
+      potsize =  flop + self.flopPotSize
+      return potsize 
+
+   @property
+   def riverPotSize(self):
+      players = self.players_set.all()
+      turn = sum([sum([int(k) for k in j]) if isinstance(j, list) else int(j) for j in [i.turn_act_amount.split('/') if '/' in i.turn_act_amount else i.turn_act_amount for i in players]])
+      potsize =  turn + self.turnPotSize
+      return potsize 
 
    def __str__(self):
       return str(self.publish_date)
 
 class Players(models.Model):
    hand = models.ForeignKey(Hands, on_delete = models.CASCADE,  null = True)
-   hero = models.BooleanField(default=False, null = True, verbose_name= "Is it hero?")
+   hero_choices = [
+      ('H', 'Hero'),
+      (' ', 'Villain')
+   ]
    position_choices = [
       ('UTG', 'Under The Gun'),
       ('MP', 'Middle Position'),
@@ -102,21 +127,26 @@ class Players(models.Model):
       ('R/C', 'Raise/Call'),
       ('R/R', 'Raise/Raise'),
    ]
+
+   hero = models.CharField(max_length=10, choices=hero_choices, default='', verbose_name= "Is it hero?")
+   
    position = models.CharField(
       max_length=50,
       choices=position_choices,
       null = True, blank = True)
 
-   first_card = models.CharField(max_length=10,
+   stack = models.PositiveSmallIntegerField(default = 200)
+
+   first_card = models.CharField(max_length=2,
    choices = card_choices, null = True, blank = True)
 
-   first_card_suit = models.CharField(max_length=5,
+   first_card_suit = models.CharField(max_length=2,
    choices=card_suits, null = True, blank = True)
 
-   second_card = models.CharField(max_length=10,
+   second_card = models.CharField(max_length=2,
    choices = card_choices, null = True, blank = True)
 
-   second_card_suit = models.CharField(max_length=5,
+   second_card_suit = models.CharField(max_length=2,
    choices=card_suits, null = True, blank = True)
 
    pre_action = models.CharField(
@@ -135,6 +165,29 @@ class Players(models.Model):
    blank = True)
 
    flop_act_amount = models.CharField(max_length=20, default = '', blank = True, verbose_name="Amount")
+
+   turn_action = models.CharField(
+   max_length=50,
+   choices=post_action_choices,
+   null = True,
+   blank = True)
+
+   turn_act_amount =  models.CharField(max_length=20, default = '', blank = True, verbose_name="Amount")
+   
+   river_action = models.CharField(
+   max_length=50,
+   choices=post_action_choices,
+   null = True,
+   blank = True)
+
+   river_act_amount =  models.CharField(max_length=20, default = '', blank = True, verbose_name="Amount")
+
+
+
+   @property
+   def handCards(self):
+      hand_cards = self.first_card + self.first_card_suit + ' ' + self.second_card + self.second_card_suit
+      return hand_cards
 
 
    def __str__(self):

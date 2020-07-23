@@ -6,13 +6,9 @@ from .forms import HandForm, PlayerForm
 # Create your views here.
 def index(request):
    hands = Hands.objects.all()
-   player_info =  Players.objects.all()
    hand_form = HandForm()
-   player_form = PlayerForm()
    context = {'hands': hands,
-   'player_info': player_info,
-   'hand_form': hand_form,
-   'player_form': player_form
+   'hand_form': hand_form
    }
    return render(request,
    template_name = 'hand/index.html',
@@ -49,7 +45,7 @@ def playersInfo(request, pk):
          if formset.is_valid():
             # print("form is valid")
             new_player = formset.save()
-            return redirect('index')
+            return redirect('/')
          # else:
          #    print("Form is not valid")
          #    return redirect('index')

@@ -1,0 +1,25 @@
+#canvas {
+   background-color: aqua;
+}
+
+.head {
+   background-color: black;
+   color: white;
+}
+
+.body {
+   background-color: grey;
+   color: wheat;
+}
+
+.progressbar li {
+   list-style-type: none;
+   height: 20%;
+   border-color: grey;
+   border-radius: 40%;
+}
+
+.progressbar-container {
+   height: 100%;
+   background-color: red;
+}
