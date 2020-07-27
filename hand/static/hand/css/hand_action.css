@@ -12,14 +12,38 @@
    color: wheat;
 }
 
-.progressbar li {
-   list-style-type: none;
-   height: 20%;
-   border-color: grey;
-   border-radius: 40%;
+.progressbar-container {
+   text-align: center;
+   height: 100%;
 }
 
-.progressbar-container {
-   height: 100%;
-   background-color: red;
+.progressbar {
+   padding: 0px 5px;
 }
+
+.progressbar li {
+   list-style-type: none;
+   padding: 20px 10px;
+   border-radius: 80%;
+   background-color:#41B619;
+   border: 1px solid #116315;
+   width: 50%;
+   margin: 10px 0px;
+}
+
+
+.progressbar li.active {
+   background-color: #FFC11E;
+}
+
+.progressbar-container ul:before {
+   content: '';
+   position: absolute;
+   width:2px;
+   height: 100%;
+   top: 0;
+   left: 0;
+   background-color:#414042;
+}
+
+

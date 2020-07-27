@@ -45,17 +45,17 @@
                   </div>
                   <hr>
                {% endfor %}
-               <button class = "btn btn-secondary" id = "go-to-pre">PreFlop</button>
-               <button class = 'btn btn-secondary d-none' id = "go-to-flop">Flop</button>
-               <button class = 'btn btn-secondary d-none' id = "go-to-turn">Turn</button>
-               <button class = 'btn btn-secondary d-none' id = "go-to-river">River</button>
+
                <input type="submit" value = "Add to Lib" class = 'btn btn-success'>
             </form>
          </div>
-         <div class = "col-lg-2 progressbar-container d-none">
+         <div class = "col-lg-2 progressbar-container">
             <ul class = "progressbar">
-               <li>Hand Info</li>
-               <li>PreFlop</li>
+               <a href="" id = "go-to-info"><li class = "active" id = "go-to-info-li"><div>Info</div></li></a>
+               <a href="" id = "go-to-pre"><li id = "go-to-pre-li"><div>Preflop</div></li></a>
+               <a href="" id = "go-to-flop"><li id = "go-to-flop-li"><div>Flop</div></li></a>
+               <a href="" id = "go-to-turn"><li id = "go-to-turn-li"><div>Turn</div></li></a>
+               <a href="" id = "go-to-river"><li id = "go-to-river-li"><div>River</div></li></a>
             </ul>
          </div>
       </div>
