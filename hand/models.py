@@ -81,12 +81,14 @@ class Players(models.Model):
       ('4', '4'),
       ('3', '3'),
       ('2', '2'),
+      (' ', 'Unk'),
    ]
    card_suits = [
       ('s', 'Spade'),
       ('h', 'Heart'),
       ('d', 'Diamond'),
       ('c', 'Club'),
+      (' ', 'Unk'),
    ]
    pre_action_choices = [
       ('F','Fold'),
@@ -138,16 +140,16 @@ class Players(models.Model):
    stack = models.PositiveSmallIntegerField(default = 200)
 
    first_card = models.CharField(max_length=2,
-   choices = card_choices, null = True, blank = True)
+   choices = card_choices, null = True, blank = True, default= ' ')
 
-   first_card_suit = models.CharField(max_length=2,
-   choices=card_suits, null = True, blank = True)
+   first_card_suit = models.CharField(max_length=10,
+   choices=card_suits, null = True, blank = True, default= ' ')
 
    second_card = models.CharField(max_length=2,
-   choices = card_choices, null = True, blank = True)
+   choices = card_choices, null = True, blank = True, default= ' ')
 
-   second_card_suit = models.CharField(max_length=2,
-   choices=card_suits, null = True, blank = True)
+   second_card_suit = models.CharField(max_length=10,
+   choices=card_suits, null = True, blank = True, default= ' ')
 
    pre_action = models.CharField(
    max_length=50,
@@ -156,7 +158,7 @@ class Players(models.Model):
    blank = True,
    verbose_name= "PreFlop action")
 
-   pre_act_amount = models.CharField(max_length=20, default = '', blank = True, verbose_name= "Amount")
+   pre_act_amount = models.CharField(max_length=20, default = '0', blank = True, verbose_name= "Amount")
 
    flop_action = models.CharField(
    max_length=50,
@@ -164,7 +166,7 @@ class Players(models.Model):
    null = True,
    blank = True)
 
-   flop_act_amount = models.CharField(max_length=20, default = '', blank = True, verbose_name="Amount")
+   flop_act_amount = models.CharField(max_length=20, default = '0', blank = True, verbose_name="Amount")
 
    turn_action = models.CharField(
    max_length=50,
@@ -172,7 +174,7 @@ class Players(models.Model):
    null = True,
    blank = True)
 
-   turn_act_amount =  models.CharField(max_length=20, default = '', blank = True, verbose_name="Amount")
+   turn_act_amount =  models.CharField(max_length=20, default = '0', blank = True, verbose_name="Amount")
    
    river_action = models.CharField(
    max_length=50,
@@ -180,7 +182,7 @@ class Players(models.Model):
    null = True,
    blank = True)
 
-   river_act_amount =  models.CharField(max_length=20, default = '', blank = True, verbose_name="Amount")
+   river_act_amount =  models.CharField(max_length=20, default = '0', blank = True, verbose_name="Amount")
 
 
 

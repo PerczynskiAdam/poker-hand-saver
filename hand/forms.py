@@ -13,3 +13,4 @@ class PlayerForm(forms.ModelForm):
       fields = '__all__'
 
 
+

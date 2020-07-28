@@ -1,6 +1,7 @@
 const pre_btn = document.getElementById('go-to-pre')
 pre_btn.addEventListener('click', e => {
    e.preventDefault();
+   // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {
       upd.classList.add('d-none');
@@ -26,6 +27,7 @@ pre_btn.addEventListener('click', e => {
       upd.classList.add('d-none')
    });
 
+   //Navbar update
    let inf_btn = document.getElementById('go-to-info-li');
    inf_btn.classList.remove('active');
 
@@ -41,6 +43,21 @@ pre_btn.addEventListener('click', e => {
    let river_btn = document.getElementById('go-to-river-li');
    river_btn.classList.remove('active');
 
+   //h5 update
+   let h5_info = document.getElementById('h5-info');
+   h5_info.classList.add('d-none')
+
+   let h5_pre = document.getElementById('h5-pre');
+   h5_pre.classList.remove('d-none')
+
+   let h5_flop = document.getElementById('h5-flop');
+   h5_flop.classList.add('d-none')
+
+   let h5_turn = document.getElementById('h5-turn');
+   h5_turn.classList.add('d-none')
+
+   let h5_river = document.getElementById('h5-river');
+   h5_river.classList.add('d-none')
 
 })
 
@@ -48,7 +65,7 @@ pre_btn.addEventListener('click', e => {
 const flop_btn = document.getElementById('go-to-flop')
 flop_btn.addEventListener('click', e => {
    e.preventDefault();
-
+   // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {
       upd.classList.add('d-none');
@@ -69,6 +86,7 @@ flop_btn.addEventListener('click', e => {
       upd.classList.add('d-none')
    });
 
+   //Navbar update
    let river = document.querySelectorAll('.river-info');
    river.forEach(upd => {
       upd.classList.add('d-none')
@@ -93,6 +111,7 @@ flop_btn.addEventListener('click', e => {
 const turn_btn = document.getElementById('go-to-turn')
 turn_btn.addEventListener('click', e => {
    e.preventDefault()
+   // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {
       upd.classList.add('d-none');
@@ -118,6 +137,7 @@ turn_btn.addEventListener('click', e => {
       upd.classList.add('d-none')
    });
 
+   //Navbar update
    let inf_btn = document.getElementById('go-to-info-li');
    inf_btn.classList.remove('active');
 
@@ -137,6 +157,7 @@ turn_btn.addEventListener('click', e => {
 const river_btn = document.getElementById('go-to-river');
 river_btn.addEventListener('click', e => {
    e.preventDefault()
+   // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {
       upd.classList.add('d-none');
@@ -162,6 +183,8 @@ river_btn.addEventListener('click', e => {
       upd.classList.remove('d-none')
    });
 
+   //Navbar update
+
    let inf_btn = document.getElementById('go-to-info-li');
    inf_btn.classList.remove('active');
 
@@ -179,3 +202,38 @@ river_btn.addEventListener('click', e => {
 
 })
 
+// Hand display update
+
+const flop_act = document.querySelectorAll('#flop-action')
+flop_act.forEach(act => {
+   if (act.textContent == "None:") {
+      let flop_disp = document.getElementById('flop-display');
+      flop_disp.classList.add('d-none');
+      
+      let turn_disp = document.getElementById('turn-display');
+      turn_disp.classList.add('d-none');
+
+      let river_disp = document.getElementById('river-display');
+      river_disp.classList.add('d-none')
+   }
+})
+
+const turn_act = document.querySelectorAll('#turn-action')
+turn_act.forEach(act => {
+   if (act.textContent == "None:") {
+      let turn_disp = document.getElementById('turn-display');
+      turn_disp.classList.add('d-none');
+
+      let river_disp = document.getElementById('river-display');
+      river_disp.classList.add('d-none')
+   }
+})
+
+const river_act = document.querySelectorAll('#river-action')
+river_act.forEach(act => {
+   if (act.textContent == "None:") {
+
+      let river_disp = document.getElementById('river-display');
+      river_disp.classList.add('d-none')
+   }
+})

@@ -2,14 +2,41 @@
    background-color: aqua;
 }
 
+
 .head {
    background-color: black;
    color: white;
+   text-align: center;
+   width: 90px;
+}
+
+.head h5 {
+   margin: 0
+}
+
+.head p {
+   color: #FBE7B5;
 }
 
 .body {
-   background-color: grey;
-   color: wheat;
+   background-color:#414042;
+   height: 100%;
+}
+.body div {
+   background-color: white;
+   color: #414042;
+   margin: 5px;
+   border-radius: 15%;
+   border: 1px solid black;
+   height: 35%;
+   text-align: center;
+}
+.body p {
+   margin: 0;
+}
+
+#handhistory {
+   height: 400px;
 }
 
 .progressbar-container {
@@ -36,7 +63,7 @@
    background-color: #FFC11E;
 }
 
-.progressbar-container ul:before {
+/* .progressbar-container ul:before {
    content: '';
    position: absolute;
    width:2px;
@@ -44,6 +71,6 @@
    top: 0;
    left: 0;
    background-color:#414042;
-}
+} */
 
 
