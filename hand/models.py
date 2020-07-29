@@ -81,14 +81,14 @@ class Players(models.Model):
       ('4', '4'),
       ('3', '3'),
       ('2', '2'),
-      (' ', 'Unk'),
+      (' ', 'x'),
    ]
    card_suits = [
       ('s', 'Spade'),
       ('h', 'Heart'),
       ('d', 'Diamond'),
       ('c', 'Club'),
-      (' ', 'Unk'),
+      ('x', 'x'),
    ]
    pre_action_choices = [
       ('F','Fold'),
@@ -143,13 +143,13 @@ class Players(models.Model):
    choices = card_choices, null = True, blank = True, default= ' ')
 
    first_card_suit = models.CharField(max_length=10,
-   choices=card_suits, null = True, blank = True, default= ' ')
+   choices=card_suits, null = True, blank = True, default= 'x')
 
    second_card = models.CharField(max_length=2,
    choices = card_choices, null = True, blank = True, default= ' ')
 
    second_card_suit = models.CharField(max_length=10,
-   choices=card_suits, null = True, blank = True, default= ' ')
+   choices=card_suits, null = True, blank = True, default= 'x')
 
    pre_action = models.CharField(
    max_length=50,

@@ -62,6 +62,13 @@
 .progressbar li.active {
    background-color: #FFC11E;
 }
+.carousel-control-prev {
+   background-color: red;
+}
+
+.carousel-control-next {
+   background-color: red;
+}
 
 /* .progressbar-container ul:before {
    content: '';
