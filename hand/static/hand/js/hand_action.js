@@ -65,6 +65,15 @@ pre_btn.addEventListener('click', e => {
 const flop_btn = document.getElementById('go-to-flop')
 flop_btn.addEventListener('click', e => {
    e.preventDefault();
+   //Flop show
+   let flop_cards = document.getElementById('flop-cards')
+   flop_cards.classList.remove('d-none')
+   //Turn hide
+   let turn_card = document.getElementById('turn-card')
+   turn_card.classList.add('d-none')
+   //River hide
+   let river_card = document.getElementById('river-card')
+   river_card.classList.add('d-none')
    // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {
@@ -111,6 +120,15 @@ flop_btn.addEventListener('click', e => {
 const turn_btn = document.getElementById('go-to-turn')
 turn_btn.addEventListener('click', e => {
    e.preventDefault()
+   //Flop hide
+   let flop_cards = document.getElementById('flop-cards')
+   flop_cards.classList.add('d-none')
+   //Turn show
+   let turn_card = document.getElementById('turn-card')
+   turn_card.classList.remove('d-none')
+   //River hide
+   let river_card = document.getElementById('river-card')
+   river_card.classList.add('d-none')
    // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {
@@ -157,6 +175,15 @@ turn_btn.addEventListener('click', e => {
 const river_btn = document.getElementById('go-to-river');
 river_btn.addEventListener('click', e => {
    e.preventDefault()
+   //Flop hide
+   let flop_cards = document.getElementById('flop-cards')
+   flop_cards.classList.add('d-none')
+   //Turn hide
+   let turn_card = document.getElementById('turn-card')
+   turn_card.classList.add('d-none')
+   //River show
+   let river_card = document.getElementById('river-card')
+   river_card.classList.remove('d-none')
    // Form update
    let hand_info = document.querySelectorAll('.hand-info');
    hand_info.forEach(upd => {

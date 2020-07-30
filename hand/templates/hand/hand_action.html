@@ -14,12 +14,36 @@
       <div class="row">
          <div class="col-lg-4">
             <form action="" role = "form" method="POST">
-               <h5 id = "h5-info">Hand Informations</h5>
+               {% csrf_token %}
+               <div class = "d-none">
+                  {{ hand_form.blinds }}
+                  {{ hand_form.num_of_players }}
+               </div>
+               <div id ="flop-cards" class = "d-none">
+                  <h5>Flop Cards</h5>
+                  <p>{{ hand_form.flop_1_card }}
+                     {{ hand_form.flop_1_card_suit }}</p>
+                  <p>{{ hand_form.flop_2_card }}
+                     {{ hand_form.flop_2_card_suit }}</p>
+                  <p>{{ hand_form.flop_3_card }}
+                     {{ hand_form.flop_3_card_suit }}</p>
+               </div>
+               <div id ="turn-card" class = "d-none">
+                  <h5>Turn Card</h5>
+                  <p>{{ hand_form.turn_card }}
+                     {{ hand_form.turn_card_suit }}</p>
+               </div>
+               <div id ="river-card" class = "d-none">
+                  <h5>River Card</h5>
+                  <p>{{ hand_form.river_card }}
+                     {{ hand_form.river_card_suit }}</p>
+               </div>
+               <!-- Titles outside of loop -->
+               <h5 id = "h5-info">Player Informations</h5>
                <h5 id = "h5-pre" class = "d-none">PreFlop</h5>
                <h5 id = "h5-flop" class = "d-none">Flop</h5>
                <h5 id = "h5-turn" class = "d-none">Turn</h5>
                <h5 id = "h5-river" class = "d-none">River</h5>
-               {% csrf_token %}
                {% for form in formset %}
                   {{formset.management_form}}
                      {% for hidden in form.hidden_fields %}
@@ -31,7 +55,7 @@
                      <p>{{form.second_card}}{{form.second_card_suit}}</p>
                   </div>
                   <div class="pre-info d-none">
-                     {{form.pre_action}} {{form.pre_act_amount}}
+                     <p>{{form.pre_action}} {{form.pre_act_amount}}</p>
                   </div>
                   <div class="flop-info d-none">
                      {{form.flop_action}} {{form.flop_act_amount}}

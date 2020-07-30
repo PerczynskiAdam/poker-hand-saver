@@ -10,6 +10,98 @@ class Hands(models.Model):
       (2, '2'),
       (3, '3')
    ]
+   card_choices = [
+      ('A', 'A'),
+      ('K', 'K'),
+      ('Q', 'Q'),
+      ('J', 'J'),
+      ('T', 'T'),
+      ('9', '9'),
+      ('8', '8'),
+      ('7', '7'),
+      ('6', '6'),
+      ('5', '5'),
+      ('4', '4'),
+      ('3', '3'),
+      ('2', '2'),
+      (' ', 'Card'),
+   ]
+   card_suits = [
+      ('s', 'Spade'),
+      ('h', 'Heart'),
+      ('d', 'Diamond'),
+      ('c', 'Club'),
+      ('x', 'Suit'),
+   ]
+
+   flop_1_card = models.CharField(
+      max_length=2,
+      default=' ',
+      choices=card_choices
+   )
+
+   flop_1_card_suit = models.CharField(
+      max_length=10,
+      choices=card_suits, 
+      null = True, 
+      blank = True, 
+      default= 'x'
+   )
+   flop_2_card = models.CharField(
+      max_length=2,
+      default=' ',
+      choices=card_choices
+   )
+
+   flop_2_card_suit = models.CharField(
+      max_length=10,
+      choices=card_suits, 
+      null = True, 
+      blank = True, 
+      default= 'x'
+   )
+   flop_3_card = models.CharField(
+      max_length=2,
+      default=' ',
+      choices=card_choices
+   )
+
+   flop_3_card_suit= models.CharField(
+      max_length=10,
+      choices=card_suits, 
+      null = True, 
+      blank = True, 
+      default= 'x'
+   )
+
+   turn_card = models.CharField(
+      max_length=2,
+      default=' ',
+      choices=card_choices
+   )
+
+   turn_card_suit = models.CharField(
+      max_length=10,
+      choices=card_suits, 
+      null = True, 
+      blank = True, 
+      default= 'x'
+   )
+
+   river_card = models.CharField(
+      max_length=2,
+      default=' ',
+      choices=card_choices
+   )
+
+   river_card_suit = models.CharField(
+      max_length=10,
+      choices=card_suits, 
+      null = True, 
+      blank = True, 
+      default= 'x'
+   )
+
    blinds = models.CharField(
       max_length=10,
       choices=blind_choices,
@@ -50,6 +142,10 @@ class Hands(models.Model):
       potsize =  turn + self.turnPotSize
       return potsize 
 
+   @property
+   def flopCards(self):
+      return self.flop_1_card + self.flop_1_card_suit + self.flop_2_card + self.flop_2_card_suit + self.flop_3_card + self.flop_3_card_suit
+
    def __str__(self):
       return str(self.publish_date)
 
@@ -66,6 +162,7 @@ class Players(models.Model):
       ('BTN', 'Button'),
       ('SB', 'Small Blind'),
       ('BB', 'Big Blind'),
+      ('', 'Choose position')
    ]
    card_choices = [
       ('A', 'A'),
@@ -81,14 +178,14 @@ class Players(models.Model):
       ('4', '4'),
       ('3', '3'),
       ('2', '2'),
-      (' ', 'x'),
+      (' ', 'Card'),
    ]
    card_suits = [
       ('s', 'Spade'),
       ('h', 'Heart'),
       ('d', 'Diamond'),
       ('c', 'Club'),
-      ('x', 'x'),
+      ('x', 'Suit'),
    ]
    pre_action_choices = [
       ('F','Fold'),
@@ -133,22 +230,23 @@ class Players(models.Model):
    hero = models.CharField(max_length=10, choices=hero_choices, default='', verbose_name= "Is it hero?")
    
    position = models.CharField(
-      max_length=50,
+      max_length=20,
       choices=position_choices,
-      null = True, blank = True)
+      null = True, blank = True,
+      default= '')
 
    stack = models.PositiveSmallIntegerField(default = 200)
 
    first_card = models.CharField(max_length=2,
    choices = card_choices, null = True, blank = True, default= ' ')
 
-   first_card_suit = models.CharField(max_length=10,
+   first_card_suit = models.CharField(max_length=2,
    choices=card_suits, null = True, blank = True, default= 'x')
 
    second_card = models.CharField(max_length=2,
    choices = card_choices, null = True, blank = True, default= ' ')
 
-   second_card_suit = models.CharField(max_length=10,
+   second_card_suit = models.CharField(max_length=2,
    choices=card_suits, null = True, blank = True, default= 'x')
 
    pre_action = models.CharField(
@@ -188,7 +286,7 @@ class Players(models.Model):
 
    @property
    def handCards(self):
-      hand_cards = self.first_card + self.first_card_suit + ' ' + self.second_card + self.second_card_suit
+      hand_cards = str(self.first_card) + str(self.first_card_suit) + ' ' + str(self.second_card) + str(self.second_card_suit)
       return hand_cards
 
 

@@ -14,7 +14,20 @@
             <p><strong>Hand Form</strong></p>
             <form action="{% url 'addhandinfo' %}" role = "form" method = "POST">
                {% csrf_token %}
-               {{ hand_form.as_p }}
+               {{ hand_form.num_of_players }}
+               {{ hand_form.blinds }}
+               <div class="d-none">
+                  <p>{{ hand_form.flop_1_card }}
+                     {{ hand_form.flop_1_card_suit }}</p>
+                  <p>{{ hand_form.flop_2_card }}
+                     {{ hand_form.flop_2_card_suit }}</p>
+                  <p>{{ hand_form.flop_3_card }}
+                     {{ hand_form.flop_3_card_suit }}</p>
+                  <p>{{ hand_form.turn_card }}
+                     {{ hand_form.turn_card_suit }}</p>
+                  <p>{{ hand_form.river_card }}
+                     {{ hand_form.river_card_suit }}</p>
+               </div>
                <input type="submit" value="Add hand to library" class = 'btn btn-secondary'>
                <hr>
             </form>
@@ -23,9 +36,16 @@
 
          <div class="col-lg-6">
             <p><strong>Library</strong></p>
-            {% for hand in hands %}
-               <a href="{% url 'playersinfo' hand.id %}"><p>{{hand.publish_date}}__{{hand.blinds}}__{{hand.num_of_players}}</p></a>
-            {% endfor %}
+            <table class = "table table-striped">
+               <tbody>
+                  {% for hand in hands %}
+                  <tr>
+                     <td><a href="{% url 'playersinfo' hand.id %}"><p>{{hand.publish_date}}__{{hand.blinds}}__{{hand.num_of_players}}</p></a></td>
+                     <td><a href="{% url 'deletehand' hand.id %}"><button class = "btn btn-danger">Delete</button></a></td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
          </div>
       </div>
    </div>

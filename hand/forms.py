@@ -5,7 +5,7 @@ from .models import Hands, Players
 class HandForm(forms.ModelForm):
    class Meta:
       model = Hands
-      fields = ['num_of_players', 'blinds']
+      fields = '__all__'
 
 class PlayerForm(forms.ModelForm):
    class Meta:
