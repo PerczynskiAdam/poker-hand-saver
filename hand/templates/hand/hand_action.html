@@ -83,7 +83,7 @@
          </div>
       </div>
       <div>
-         <div id = "handhistory">
+         <div id = "capture">
             <div class="row">
                <div>
                   <div class = 'head'>
@@ -106,7 +106,7 @@
                </div>
                <div>
                   <div class = 'head'>
-                     <h5>Pre</h5>
+                     <h5>Preflop</h5>
                      <p>{{ hand.potSize }}</p>
                   </div>
                   <div class = "body">
@@ -120,7 +120,7 @@
                </div>
                <div id = "flop-display">
                   <div class = 'head'>
-                     <h5>Flop</h5>
+                     <h5>{{ hand.flopCards }}</h5>
                      <p>{{ hand.flopPotSize }}</p>
                   </div>
                   <div class = "body">
@@ -134,7 +134,7 @@
                </div>
                <div id = "turn-display">
                   <div class = 'head'>
-                     <h5>Turn</h5>
+                     <h5>{{ hand.turn_card }}{{ hand.turn_card_suit }}</h5>
                      <p>{{ hand.turnPotSize }}</p>
                   </div>
                   <div class = "body">
@@ -164,6 +164,7 @@
          </div>
       <div>
          <a href="{% url 'index' %}"><button class = "btn btn-info">Library</button></a>
+         <button onclick="screenshot()" class = "btn btn-success">SS</button>
       </div>
    </div>
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="
@@ -172,6 +173,14 @@
    sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="
    sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
    <script src = "{% static 'hand/js/hand_action.js' %}" type = "module"></script>
+   <script>
+      function screenshot() {
+         html2canvas(document.querySelector('#capture')).then(function(canvas) {
+         document.body.appendChild(canvas);
+         });
+      }
+   </script>
 </body>
 </html>
