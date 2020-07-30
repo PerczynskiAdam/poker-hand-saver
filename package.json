@@ -1,0 +1,22 @@
+{
+  "name": "pokerhandsaver",
+  "version": "1.0.0",
+  "description": "html2canvas install",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PerczynskiAdam/poker-hand-saver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PerczynskiAdam/poker-hand-saver/issues"
+  },
+  "homepage": "https://github.com/PerczynskiAdam/poker-hand-saver#readme",
+  "dependencies": {
+    "html2canvas": "^1.0.0-rc.5"
+  }
+}
