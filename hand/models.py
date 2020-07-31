@@ -146,6 +146,7 @@ class Hands(models.Model):
    def flopCards(self):
       return self.flop_1_card + self.flop_1_card_suit + self.flop_2_card + self.flop_2_card_suit + self.flop_3_card + self.flop_3_card_suit
 
+
    def __str__(self):
       return str(self.publish_date)
 

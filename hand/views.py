@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Hands, Players
 from django.forms import inlineformset_factory
 from .forms import HandForm, PlayerForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def index(request):
@@ -39,7 +40,7 @@ def playersInfo(request, pk):
       if formset.is_valid() and hand_form.is_valid():
          formset.save()
          hand_form.save()
-         return redirect('/')
+         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
       else:
          print("Form is not valid")
 

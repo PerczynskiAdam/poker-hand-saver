@@ -177,10 +177,19 @@
    <script src = "{% static 'hand/js/hand_action.js' %}" type = "module"></script>
    <script>
       function screenshot() {
-         html2canvas(document.querySelector('#capture')).then(function(canvas) {
-         document.body.appendChild(canvas);
+         html2canvas(document.querySelector('#capture')).then(canvas => {
+            console.log(canvas);
+            let dataUrl = canvas.toDataURL('image/png');
+            downloadImage(dataUrl)
          });
-      }
+      };
+      function downloadImage(data, filename = 'untitled.png') {
+         var a = document.createElement('a');
+         a.href = data;
+         a.download = filename;
+         document.body.appendChild(a);
+         a.click();
+      };
    </script>
 </body>
 </html>
