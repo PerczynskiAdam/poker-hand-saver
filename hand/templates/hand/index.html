@@ -40,7 +40,7 @@
                <tbody>
                   {% for hand in hands %}
                   <tr>
-                     <td><a href="{% url 'playersinfo' hand.id %}"><p>{{hand.publish_date}}__{{hand.blinds}}__{{hand.num_of_players}}</p></a></td>
+                     <td><a href="{% url 'playersinfo' hand.id %}"><p>{{hand.publish_date}}, Stakes: {{hand.blinds}}, Players: {{hand.num_of_players}}</p></a></td>
                      <td><a href="{% url 'deletehand' hand.id %}"><button class = "btn btn-danger">Delete</button></a></td>
                   </tr>
                   {% endfor %}

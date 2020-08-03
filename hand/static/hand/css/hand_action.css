@@ -1,42 +1,5 @@
-#canvas {
-   background-color: aqua;
-}
-
-
-.head {
-   background-color: black;
-   color: white;
-   text-align: center;
-   width: 90px;
-}
-
-.head h5 {
-   margin: 0
-}
-
-.head p {
-   color: #FBE7B5;
-}
-
-.body {
-   background-color:#414042;
-   height: 100%;
-}
-.body div {
-   background-color: white;
-   color: #414042;
-   margin: 5px;
-   border-radius: 15%;
-   border: 1px solid black;
-   height: 35%;
-   text-align: center;
-}
-.body p {
-   margin: 0;
-}
-
-#capture {
-   height: 400px;
+.row {
+   margin: 0px 0px;
 }
 
 .progressbar-container {
@@ -62,13 +25,6 @@
 .progressbar li.active {
    background-color: #FFC11E;
 }
-.carousel-control-prev {
-   background-color: red;
-}
-
-.carousel-control-next {
-   background-color: red;
-}
 
 /* .progressbar-container ul:before {
    content: '';
@@ -79,5 +35,50 @@
    left: 0;
    background-color:#414042;
 } */
+
+#capture {
+   width: 450px;
+}
+
+.capture-el {
+   width: 20%;
+   border: 1px solid #D1D3D4;
+}
+
+.head {
+   background-color: black;
+   color: white;
+   text-align: center;
+   margin-bottom: -5px;
+   border-bottom: 1px solid #D1D3D4;
+}
+
+.head h5 {
+   margin: 0
+}
+
+.head p {
+   color: #FBE7B5;
+   margin-bottom: 0px;
+}
+
+.body {
+   background-color:#414042;
+   height: 150px;
+}
+
+.body p {
+   margin-bottom: 0px;
+}
+.body div {
+   background-color: white;
+   margin: 5px;
+   border-radius: 15%;
+   height: 70px;
+   text-align: center;
+}
+
+
+
 
 
